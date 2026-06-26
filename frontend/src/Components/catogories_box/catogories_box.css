@@ -1,0 +1,376 @@
+﻿.catogories-box-page {
+  min-height: 100vh;
+  padding: 96px 48px 56px;
+  color: #fdfdff;
+  background: #080a10;
+}
+
+.catogories-box-page h1 {
+  margin: 0 0 86px;
+  text-align: center;
+  font-size: 48px;
+  line-height: 1.1;
+  font-weight: 900;
+}
+
+.catogories-box-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 42px 10px;
+  margin-left: 80px;
+}
+
+.catogories-box-card {
+  position: relative;
+  min-width: 0;
+  height: 280px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 4px;
+  padding: 0;
+  background: #171b24;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.catogories-box-card img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.catogories-box-card::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 45%;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.84), rgba(0, 0, 0, 0));
+}
+
+.catogories-box-card strong,
+.catogories-box-language,
+.catogories-box-badge {
+  position: absolute;
+  z-index: 1;
+}
+
+.catogories-box-card strong {
+  right: 10px;
+  bottom: 10px;
+  left: 10px;
+  overflow: hidden;
+  color: #fff;
+  font-size: 15px;
+  line-height: 1.2;
+  font-weight: 900;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.catogories-box-badge {
+  top: 0;
+  right: 0;
+  padding: 4px 7px;
+  border-bottom-left-radius: 8px;
+  background: #c50bdc;
+  color: #fff;
+  font-size: 18px;
+  line-height: 0.92;
+  font-weight: 900;
+  text-align: center;
+}
+
+.catogories-box-state {
+  min-height: 60vh;
+  display: grid;
+  place-items: center;
+  color: #f7f7fb;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.catogories-box-spinner {
+  width: 54px;
+  height: 54px;
+  border: 5px solid rgba(255, 255, 255, 0.22);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: catogories-box-spin 0.8s linear infinite;
+}
+
+@keyframes catogories-box-spin {
+  to { transform: rotate(360deg); }
+}
+
+.catogories-box-hover {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 48px 12px 12px;
+  background: linear-gradient(0deg, rgba(12, 14, 20, 0.96), rgba(12, 14, 20, 0));
+  color: #fff;
+  opacity: 0;
+  transform: translateY(14px), scale(8);
+  transition: opacity 0.4s ease, transform 0.8s ease;
+  text-align: left;
+}
+
+.catogories-box-play {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #f7f7fb;
+  color: #070910;
+}
+
+.catogories-box-hover b {
+  overflow: hidden;
+  font-size: 15px;
+  line-height: 1.2;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.catogories-box-hover small {
+  color: #aeb7cc;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.catogories-box-card:hover .catogories-box-hover {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.catogories-box-card {
+  overflow: visible;
+  z-index: 1;
+}
+
+.catogories-box-card > img {
+  border-radius: 4px;
+}
+
+.catogories-box-card:hover {
+  z-index: 40;
+}
+
+.catogories-box-hover {
+  position: absolute;
+  top: -75px;
+  left: 50%;
+  z-index: 50;
+  width: 320px;
+  min-height: 480px;
+  display: block;
+  overflow: hidden;
+  padding: 0 16px 18px;
+  border-radius: 8px;
+  background: #151821;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.72);
+  color: #f7f7fb;
+  opacity: 0;
+  pointer-events: none;
+  text-align: left;
+  transform: translate(-50%, 18px) scale(0.96);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.catogories-box-card:hover .catogories-box-hover {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
+}
+
+.catogories-hover-art {
+  position: relative;
+  display: block;
+  height: 250px;
+  margin: 0 -16px 16px;
+  overflow: hidden;
+  background: #090b10;
+}
+
+.catogories-hover-art img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  filter: brightness(0.72);
+}
+
+.catogories-hover-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(21, 24, 33, 0.95), rgba(21, 24, 33, 0.08) 58%, rgba(21, 24, 33, 0.2));
+}
+
+.catogories-hover-muted,
+.catogories-hover-art b {
+  position: absolute;
+  z-index: 1;
+}
+
+.catogories-hover-muted {
+  right: 18px;
+  bottom: 28px;
+  color: #fff;
+}
+
+.catogories-hover-art b {
+  right: 18px;
+  bottom: 42px;
+  left: 18px;
+  overflow: hidden;
+  color: #fff;
+  font-size: 36px;
+  line-height: 0.95;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.catogories-hover-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.catogories-hover-watch {
+  height: 62px;
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border-radius: 8px;
+  background: #e9eef7;
+  color: #090b10;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.catogories-hover-add {
+  width: 62px;
+  height: 62px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: #272b35;
+  color: #fff;
+}
+
+.catogories-hover-meta {
+  display: block;
+  margin-bottom: 12px;
+  color: #e0e4ee;
+  font-size: 19px;
+  font-weight: 900;
+}
+
+.catogories-box-hover small {
+  display: -webkit-box;
+  overflow: hidden;
+  color: #aeb7cc;
+  font-size: 19px;
+  line-height: 1.35;
+  font-weight: 600;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.catogories-box-card[data-preview-edge="left"] .catogories-box-hover {
+  left: 0;
+  right: auto;
+  transform: translate(-20%, 1px) scale(0.7);
+  transition: opacity 0.3s ease, transform 0.8s ease;
+}
+
+.catogories-box-card[data-preview-edge="left"]:hover .catogories-box-hover {
+  transform: translate(-20%, 1px) scale(0.7);
+  transition: opacity 0.3s ease, transform 0.8s ease;
+}
+
+.catogories-box-card[data-preview-edge="right"] .catogories-box-hover {
+  right: 0;
+  left: auto;
+  transform: translate(20%, 1px) scale(0.7);
+  transition: opacity 0.3s ease, transform 0.8s ease;
+}
+
+.catogories-box-card[data-preview-edge="right"]:hover .catogories-box-hover {
+  transform: translate(20%, 1px) scale(0.7);
+  transition: opacity 0.3s ease, transform 0.8s ease;
+}
+
+.catogories-box-card[data-preview-edge="hidden"] .catogories-box-hover {
+  display: none;
+}
+
+.catogories-box-hover {
+  pointer-events: auto;
+}
+
+.catogories-box-hover:hover {
+  opacity: 1;
+  transform: translate(-50%, 18px) scale(0.7);
+  transition: opacity 0.3s ease, transform 0.8s ease;
+}
+
+.catogories-box-card[data-preview-edge="left"] .catogories-box-hover:hover {
+  transform: translate(0, 0) scale(1);
+  transition: opacity 0.3s ease, transform 0.8s ease;
+}
+
+.catogories-box-card[data-preview-edge="right"] .catogories-box-hover:hover {
+  transform: translate(0, 0) scale(1);
+  transition: opacity 0.3s ease, transform 0.8s ease;
+}
+
+/* Final category hover positioning: keep edge previews inside the visible page. */
+.catogories-box-card[data-preview-edge="left"] .catogories-box-hover {
+  left: 0;
+  right: auto;
+  transform: translate(0, 18px) scale(0.96);
+}
+
+.catogories-box-card[data-preview-edge="left"]:hover .catogories-box-hover,
+.catogories-box-card[data-preview-edge="left"] .catogories-box-hover:hover {
+  transform: translate(0, 0) scale(1);
+}
+
+.catogories-box-card[data-preview-edge="right"] .catogories-box-hover {
+  right: 0;
+  left: auto;
+  transform: translate(0, 18px) scale(0.96);
+}
+
+.catogories-box-card[data-preview-edge="right"]:hover .catogories-box-hover,
+.catogories-box-card[data-preview-edge="right"] .catogories-box-hover:hover {
+  transform: translate(0, 0) scale(1);
+}
+
+.catogories-box-card[data-preview-edge="center"] .catogories-box-hover {
+  left: 50%;
+  right: auto;
+  transform: translate(-50%, 18px) scale(0.96);
+}
+
+.catogories-box-card[data-preview-edge="center"]:hover .catogories-box-hover,
+.catogories-box-card[data-preview-edge="center"] .catogories-box-hover:hover {
+  transform: translate(-50%, 0) scale(1);
+}

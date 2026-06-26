@@ -1,0 +1,23 @@
+.header {
+  position: fixed;
+  top: 24px;
+  left: 21px;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding: 0;
+}
+
+.logo {
+  width: 75px;
+  height: 75px;
+  display: block;
+  
+}
+
+.header-left {
+  margin-left: 0;
+}

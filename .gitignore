@@ -1,0 +1,61 @@
+# =========================================
+# Backend
+# =========================================
+Backend/node_modules/
+Backend/dist/
+Backend/.env
+
+# Backend log files
+Backend/*.log
+Backend/*-dev.log
+Backend/*-dev.err.log
+
+# =========================================
+# Frontend
+# =========================================
+frontend/node_modules/
+frontend/dist/
+
+# Frontend log files
+frontend/*.log
+frontend/*-dev.log
+frontend/*-dev.err.log
+
+# Environment files
+frontend/.env
+
+# =========================================
+# VS Code
+# =========================================
+.vscode/
+
+# =========================================
+# Operating System
+# =========================================
+.DS_Store
+Thumbs.db
+
+# =========================================
+# Build / Cache
+# =========================================
+.cache/
+coverage/
+
+# =========================================
+# npm
+# =========================================
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =========================================
+# Environment files anywhere
+# =========================================
+.env
+.env.*
+
+# =========================================
+# TypeScript Build Info
+# =========================================
+*.tsbuildinfo

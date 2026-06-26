@@ -1,0 +1,212 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #0c0c0f;
+  color: rgb(244, 57, 57);
+  font-family: system-ui, sans-serif;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 96px;
+  height: 100vh;
+
+  background: none;
+
+  padding: 139px 0 24px 40px;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: visible;
+
+  z-index: 10;
+  
+
+}
+
+
+.sidebar-btn {
+  position: relative;
+
+  width: 44px;
+  height: 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  color: rgb(192, 183, 183);
+
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    width 0.2s ease;
+}
+
+.sidebar-btn svg {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+
+  transform: translateY(-50%);
+
+  flex-shrink: 0;
+}
+
+.sidebar::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 260px;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.95) 0%,
+    rgba(0, 0, 0, 0.82) 52%,
+    rgba(0, 0, 0, 0) 100%
+  );
+
+  opacity: 0;
+
+  transition: opacity 0.25s ease;
+
+  pointer-events: none;
+
+  z-index: -1;
+}
+
+.sidebar:has(.sidebar-nav:hover)::before,
+.sidebar:has(.profile-hover-zone:hover)::before,
+.sidebar:has(.sidebar-btn:hover)::before,
+.sidebar:has(.profile-btn:hover)::before {
+  opacity: 1;
+}
+
+.sidebar-label {
+  position: absolute;
+
+  top: 50%;
+  left: 58px;
+  
+  pointer-events: none;
+
+  white-space: nowrap;
+
+  font-size: 20px;
+  font-weight: 600;
+
+  opacity: 0;
+
+  transform: translate(-15px, -50%);
+
+  transition:
+    opacity 0.10s ease,
+    transform 0.45s ease;
+}
+
+.profile-btn:hover,
+.sidebar-btn:hover,
+.profile-btn.active,
+.sidebar-btn.active {
+  color: rgb(255, 251, 251);
+}
+
+.sidebar:has(.sidebar-nav:hover) .sidebar-label,
+.sidebar:has(.profile-hover-zone:hover) .sidebar-label,
+.sidebar:has(.sidebar-btn:hover) .sidebar-label,
+.sidebar:has(.profile-btn:hover) .sidebar-label {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+.sidebar:has(.sidebar-nav:hover) .sidebar-btn,
+.sidebar:has(.sidebar-btn:hover) .sidebar-btn,
+.sidebar:has(.profile-hover-zone:hover) .profile-btn,
+.sidebar:has(.profile-btn:hover) .profile-btn {
+  width: 220px;
+}
+
+.sidebar.sidebar-click-paused::before {
+  opacity: 0;
+}
+
+.sidebar.sidebar-click-paused .sidebar-label {
+  opacity: 0;
+  transform: translate(-20px, -50%);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  width: 124px;
+  margin-left: -40px;
+  padding-left: 40px;
+}
+
+.profile-hover-zone {
+  width: 124px;
+  margin-top: auto;
+  margin-left: -40px;
+  padding-left: 40px;
+}
+
+.profile-btn {
+  position: relative;
+
+  width: 44px;
+  height: 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  color: rgb(165, 159, 159);
+
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    width 0.2s ease;
+}
+
+.profile-btn svg {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+
+  transform: translateY(-50%);
+
+  flex-shrink: 0;
+}
+
+
+

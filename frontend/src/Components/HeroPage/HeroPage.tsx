@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import ContentRow, { type ContentRowData } from "../ContentRow/ContentRow";
 import Header from "../header/header";
 import HeroBanner, { type HeroBannerContent } from "../HeroBanner/HeroBanner";
-import { useLanguage } from "../../Language/LanguageContext";
 import "./HeroPage.css";
 
 type HeroPageData = {
@@ -58,7 +57,6 @@ const fetchPageData = async (page: HeroPageProps["page"], language: string, sign
 export default function HeroPage({ page }: HeroPageProps) {
   const [data, setData] = useState<HeroPageData | null>(null);
   const [error, setError] = useState("");
-  const { tmdbLanguage, t } = useLanguage();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -67,13 +65,13 @@ export default function HeroPage({ page }: HeroPageProps) {
       setError("");
 
       try {
-        setData(await fetchPageData(page, tmdbLanguage, controller.signal));
+        setData(await fetchPageData(page, "en-US", controller.signal));
       } catch (loadError) {
         if (loadError instanceof DOMException && loadError.name === "AbortError") {
           return;
         }
 
-        setError(loadError instanceof Error ? t(loadError.message) : t("Unable to load TMDB content"));
+        setError(loadError instanceof Error ? loadError.message : "Unable to load TMDB content");
       }
     };
 
@@ -82,7 +80,7 @@ export default function HeroPage({ page }: HeroPageProps) {
     return () => {
       controller.abort();
     };
-  }, [page, tmdbLanguage, t]);
+  }, [page]);
 
   const translatedHero = useMemo(() => {
     if (!data) {
@@ -91,18 +89,18 @@ export default function HeroPage({ page }: HeroPageProps) {
 
     return {
       ...data.hero,
-      rankText: t(data.hero.rankText),
-      statusText: t(data.hero.statusText),
-      runtime: t(data.hero.runtime),
-      languages: t(data.hero.languages),
-      primaryActionLabel: t(data.hero.primaryActionLabel),
+      rankText: data.hero.rankText,
+      statusText: data.hero.statusText,
+      runtime: data.hero.runtime,
+      languages: data.hero.languages,
+      primaryActionLabel: data.hero.primaryActionLabel,
       previews: data.hero.previews.map((preview) => ({
         ...preview,
-        runtime: preview.runtime ? t(preview.runtime) : preview.runtime,
-        languages: preview.languages ? t(preview.languages) : preview.languages,
+        runtime: preview.runtime,
+        languages: preview.languages,
       })),
     };
-  }, [data, t]);
+  }, [data]);
 
   return (
     <>
@@ -114,7 +112,7 @@ export default function HeroPage({ page }: HeroPageProps) {
 
           <div className="hero-page-rows">
             {data.rows.map((row) => (
-              <ContentRow row={{ ...row, title: t(row.title) }} key={row.title} />
+              <ContentRow row={row} key={row.title} />
             ))}
           </div>
         </>

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Play, Plus, X } from "lucide-react";
-import { useLanguage } from "../../Language/LanguageContext";
 import type { ContentCard } from "../ContentRow/ContentRow";
 import "./MovieDetails.css";
 
@@ -43,7 +42,6 @@ export default function MovieDetails() {
   const [trailerKey, setTrailerKey] = useState("");
   const [trailerMessage, setTrailerMessage] = useState("");
   const [autoPlayTrailer, setAutoPlayTrailer] = useState(false);
-  const { tmdbLanguage, t } = useLanguage();
 
   useEffect(() => {
     const openDetails = (event: Event) => {
@@ -87,7 +85,7 @@ export default function MovieDetails() {
 
       for (const baseUrl of apiBaseUrls) {
         try {
-          const params = new URLSearchParams({ language: tmdbLanguage });
+          const params = new URLSearchParams({ language: "en-US" });
           const response = await fetch(
             `${baseUrl}/api/tmdb/details/${target.mediaType}/${target.id}?${params.toString()}`,
             { signal: controller.signal },
@@ -102,7 +100,7 @@ export default function MovieDetails() {
             if (nextDetails.trailerKey) {
               setTrailerKey(nextDetails.trailerKey);
             } else {
-              setTrailerMessage(t("Trailer is not available for this title."));
+              setTrailerMessage("Trailer is not available for this title.");
             }
           }
 
@@ -119,7 +117,7 @@ export default function MovieDetails() {
     loadDetails();
 
     return () => controller.abort();
-  }, [target, autoPlayTrailer, tmdbLanguage, t]);
+  }, [target, autoPlayTrailer]);
 
   const closeDetails = () => {
     setTarget(null);
@@ -131,7 +129,7 @@ export default function MovieDetails() {
 
   const playTrailer = () => {
     if (!details?.trailerKey) {
-      setTrailerMessage(t("Trailer is not available for this title."));
+      setTrailerMessage("Trailer is not available for this title.");
       return;
     }
 
@@ -146,7 +144,7 @@ export default function MovieDetails() {
   return (
     <div className="movie-details-backdrop" role="dialog" aria-modal="true">
       <div className="movie-details-panel">
-        <button className="movie-details-close" type="button" onClick={closeDetails} aria-label={t("Close details")}>
+        <button className="movie-details-close" type="button" onClick={closeDetails} aria-label="Close details">
           <X size={34} />
         </button>
 
@@ -165,18 +163,18 @@ export default function MovieDetails() {
                   <span>/</span>
                   {details.rating}
                   <span>/</span>
-                  {t(details.runtime)}
+                  {details.runtime}
                   <span>/</span>
-                  {t(details.languages)}
+                  {details.languages}
                 </p>
                 <p className="movie-details-overview">{details.overview}</p>
                 <p className="movie-details-genres">{details.genres.join("  |  ")}</p>
                 <div className="movie-details-actions">
                   <button className="movie-details-watch" type="button" onClick={playTrailer}>
                     <Play size={22} fill="currentColor" />
-                    {t("Watch Now")}
+                    Watch Now
                   </button>
-                  <button className="movie-details-add" type="button" aria-label={`${t("Add")} ${details.title}`}>
+                  <button className="movie-details-add" type="button" aria-label={`Add ${details.title}`}>
                     <Plus size={28} />
                   </button>
                 </div>
@@ -185,7 +183,7 @@ export default function MovieDetails() {
             </section>
 
             <section className="movie-details-more">
-              <h2>{t("More Like This")}</h2>
+              <h2>More Like This</h2>
               <div className="movie-details-related-grid">
                 {details.moreLikeThis.map((item) => (
                   <button className="movie-details-related-card" type="button" key={`${item.mediaType}-${item.id}`} onClick={() => {
@@ -204,7 +202,7 @@ export default function MovieDetails() {
 
       {trailerKey && (
         <div className="movie-trailer-fullscreen">
-          <button className="movie-trailer-close" type="button" onClick={() => setTrailerKey("")} aria-label={t("Close trailer")}>
+          <button className="movie-trailer-close" type="button" onClick={() => setTrailerKey("")} aria-label="Close trailer">
             <X size={34} />
           </button>
           <iframe

@@ -82,22 +82,7 @@
   border: 1px solid rgba(255, 255, 255, 0.34);
   background: rgba(17, 17, 17, 0.74);
   font-size: 20px;
-}
-
-.intro-language select {
-  max-width: 160px;
-  border: 0;
-  background: transparent;
-  color: #fff;
-  font: inherit;
-  font-weight: 900;
-  outline: none;
-  cursor: pointer;
-}
-
-.intro-language option {
-  color: #111;
-  background: #fff;
+  cursor: default;
 }
 
 .intro-signup {

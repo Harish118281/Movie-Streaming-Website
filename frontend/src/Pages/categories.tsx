@@ -2,7 +2,6 @@
 import { Link } from "react-router-dom";
 import { Clapperboard, Monitor, PlaySquare, Sparkles } from "lucide-react";
 import Header from "../Components/header/header";
-import { useLanguage } from "../Language/LanguageContext";
 import "./page.css";
 
 type CategoryTile = {
@@ -35,13 +34,11 @@ const browseClasses = ["browse-teal", "browse-purple", "browse-blue", "browse-vi
 const tileClasses = ["genre-rose", "genre-teal", "genre-gold", "genre-cyan", "genre-blue"];
 
 function ImageRail({ title, tiles, viewAll = false, studio = false }: { title: string; tiles: CategoryTile[]; viewAll?: boolean; studio?: boolean }) {
-  const { t } = useLanguage();
-
   return (
     <section className="category-section">
       <div className="category-section-header">
-        <h2>{t(title)}</h2>
-        {viewAll && <Link to={tiles[0]?.route || "/categories"}>{t("View All")}</Link>}
+        <h2>{title}</h2>
+        {viewAll && <Link to={tiles[0]?.route || "/categories"}>View All</Link>}
       </div>
 
       <div className={studio ? "category-rail studio-rail" : "category-rail"}>
@@ -53,8 +50,8 @@ function ImageRail({ title, tiles, viewAll = false, studio = false }: { title: s
           >
             <img src={tile.imageUrl} alt="" />
             <span className="category-tile-shade" />
-            <strong>{t(tile.title)}</strong>
-            {tile.subtitle && <small>{t(tile.subtitle)}</small>}
+            <strong>{tile.title}</strong>
+            {tile.subtitle && <small>{tile.subtitle}</small>}
           </Link>
         ))}
       </div>
@@ -64,7 +61,6 @@ function ImageRail({ title, tiles, viewAll = false, studio = false }: { title: s
 
 export default function Categories() {
   const [data, setData] = useState<CategoriesResponse | null>(null);
-  const { tmdbLanguage, t } = useLanguage();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -72,7 +68,7 @@ export default function Categories() {
     const loadCategories = async () => {
       for (const baseUrl of apiBaseUrls) {
         try {
-          const params = new URLSearchParams({ language: tmdbLanguage });
+          const params = new URLSearchParams({ language: "en-US" });
           const response = await fetch(`${baseUrl}/api/tmdb/categories?${params.toString()}`, {
             signal: controller.signal,
           });
@@ -90,7 +86,7 @@ export default function Categories() {
     loadCategories();
 
     return () => controller.abort();
-  }, [tmdbLanguage]);
+  }, []);
 
   return (
     <>
@@ -104,7 +100,7 @@ export default function Categories() {
         ) : (
           <>
             <section className="category-section">
-              <h1>{t("Browse")}</h1>
+              <h1>Browse</h1>
               <div className="browse-grid">
                 {withoutNews(data.browse).map((tile, index) => {
                   const Icon = browseIcons[index % browseIcons.length];
@@ -113,7 +109,7 @@ export default function Categories() {
                     <Link className={`browse-card ${browseClasses[index % browseClasses.length]}`} to={tile.route} key={tile.slug}>
                       <img src={tile.imageUrl} alt="" />
                       <span className="browse-card-shade" />
-                      <strong>{t(tile.title)}</strong>
+                      <strong>{tile.title}</strong>
                       <Icon size={92} strokeWidth={1.2} />
                     </Link>
                   );

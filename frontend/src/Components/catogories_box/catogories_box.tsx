@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { openMovieDetails } from "../MovieDetails/MovieDetails";
 import Header from "../header/header";
 import type { ContentCard } from "../ContentRow/ContentRow";
-import { useLanguage } from "../../Language/LanguageContext";
 import "./catogories_box.css";
 
 type CategoryResponse = {
@@ -22,7 +21,6 @@ export default function CatogoriesBox() {
   const { slug = "" } = useParams();
   const [data, setData] = useState<CategoryResponse | null>(null);
   const [loading, setLoading] = useState(true);
-  const { tmdbLanguage, t } = useLanguage();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -32,7 +30,7 @@ export default function CatogoriesBox() {
 
       for (const baseUrl of apiBaseUrls) {
         try {
-          const params = new URLSearchParams({ language: tmdbLanguage });
+          const params = new URLSearchParams({ language: "en-US" });
           const response = await fetch(`${baseUrl}/api/tmdb/category/${slug}?${params.toString()}`, {
             signal: controller.signal,
           });
@@ -54,7 +52,7 @@ export default function CatogoriesBox() {
     loadCategory();
 
     return () => controller.abort();
-  }, [slug, tmdbLanguage]);
+  }, [slug]);
 
   return (
     <>
@@ -67,7 +65,7 @@ export default function CatogoriesBox() {
           </div>
         ) : data ? (
           <>
-            <h1>{t(data.title)}</h1>
+            <h1>{data.title}</h1>
             <div className="catogories-box-grid">
               {data.items.map((item, index) => (
                 <button
@@ -92,7 +90,7 @@ export default function CatogoriesBox() {
                   }}
                 >
                   <img src={item.posterUrl || item.backdropUrl} alt={item.title} />
-                  {(index + 1) % 3 === 0 && <span className="catogories-box-badge">{t("TOP")}<br />10</span>}
+                  {(index + 1) % 3 === 0 && <span className="catogories-box-badge">TOP<br />10</span>}
                   <span className="catogories-box-language">{item.originalLanguage || item.year}</span>
                   <strong>{item.title}</strong>
                   <span className="catogories-box-hover">
@@ -103,7 +101,7 @@ export default function CatogoriesBox() {
                       <b>{item.title}</b>
                     </span>
                     <span className="catogories-hover-actions">
-                      <span className="catogories-hover-watch"><Play size={16} fill="currentColor" /> {t("Watch Now")}</span>
+                      <span className="catogories-hover-watch"><Play size={16} fill="currentColor" /> Watch Now</span>
                       <span className="catogories-hover-add"><Plus size={22} /></span>
                     </span>
                     <span className="catogories-hover-meta">{item.year} / TMDB {item.rating}</span>
@@ -114,13 +112,12 @@ export default function CatogoriesBox() {
             </div>
           </>
         ) : (
-          <div className="catogories-box-state">{t("No TMDB category found")}</div>
+          <div className="catogories-box-state">No TMDB category found</div>
         )}
       </section>
     </>
   );
 }
-
 
 
 

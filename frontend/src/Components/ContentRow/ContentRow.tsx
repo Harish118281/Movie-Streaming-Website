@@ -1,5 +1,4 @@
 import { Play, Plus, VolumeX } from "lucide-react";
-import { useLanguage } from "../../Language/LanguageContext";
 import { openMovieDetails } from "../MovieDetails/MovieDetails";
 import "./ContentRow.css";
 
@@ -25,11 +24,9 @@ type ContentRowProps = {
 };
 
 export default function ContentRow({ row }: ContentRowProps) {
-  const { t } = useLanguage();
-
   return (
-    <section className="content-row" aria-label={t(row.title)}>
-      <h2 className="content-row-title">{t(row.title)}</h2>
+    <section className="content-row" aria-label={row.title}>
+      <h2 className="content-row-title">{row.title}</h2>
 
       <div className="content-row-track">
         {row.items.map((item) => (
@@ -70,7 +67,7 @@ export default function ContentRow({ row }: ContentRowProps) {
                 <strong>{item.title}</strong>
               </span>
               <span className="content-hover-actions">
-                <span className="content-hover-watch"><Play size={16} fill="currentColor" /> {t("Watch Now")}</span>
+                <span className="content-hover-watch"><Play size={16} fill="currentColor" /> Watch Now</span>
                 <span className="content-hover-add"><Plus size={22} /></span>
               </span>
               <span className="content-hover-meta">{item.year} / TMDB {item.rating}</span>

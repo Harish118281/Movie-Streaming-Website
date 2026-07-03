@@ -3,7 +3,6 @@ import { Play, Plus, Search as SearchIcon, VolumeX } from "lucide-react";
 import { openMovieDetails } from "../Components/MovieDetails/MovieDetails";
 import type { ContentCard, ContentRowData } from "../Components/ContentRow/ContentRow";
 import Header from "../Components/header/header";
-import { useLanguage } from "../Language/LanguageContext";
 import "./page.css";
 
 type SearchResponse = {
@@ -21,7 +20,6 @@ export default function Search() {
   const [query, setQuery] = useState("");
   const [items, setItems] = useState<ContentCard[]>([]);
   const [loading, setLoading] = useState(true);
-  const { tmdbLanguage, t } = useLanguage();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -32,7 +30,7 @@ export default function Search() {
 
       for (const baseUrl of apiBaseUrls) {
         try {
-          const params = new URLSearchParams({ option: "movies", language: tmdbLanguage });
+          const params = new URLSearchParams({ option: "movies", language: "en-US" });
 
           if (query.trim()) {
             params.set("query", query.trim());
@@ -70,11 +68,11 @@ export default function Search() {
       window.clearTimeout(retryTimer);
       controller.abort();
     };
-  }, [query, tmdbLanguage]);
+  }, [query]);
 
   const title = useMemo(
-    () => (query.trim() ? `${t("Search results for")} ${query.trim()}` : t("Trending Movies")),
-    [query, t],
+    () => (query.trim() ? `Search results for ${query.trim()}` : "Trending Movies"),
+    [query],
   );
 
   return (
@@ -87,8 +85,8 @@ export default function Search() {
           <input
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder={t("Movies, shows and more")}
-            aria-label={t("Search movies")}
+            placeholder="Movies, shows and more"
+            aria-label="Search movies"
           />
         </label>
 
@@ -119,7 +117,7 @@ export default function Search() {
                 }}
               >
                 <img src={item.posterUrl || item.backdropUrl} alt={item.title} />
-                {(index + 1) % 4 === 0 && <span className="search-top-badge">{t("TOP")}<br />10</span>}
+                {(index + 1) % 4 === 0 && <span className="search-top-badge">TOP<br />10</span>}
                 <span className="poster-hover-card">
                   <span className="poster-hover-art">
                     <img src={item.backdropUrl || item.posterUrl} alt="" />
@@ -128,7 +126,7 @@ export default function Search() {
                     <strong>{item.title}</strong>
                   </span>
                   <span className="poster-hover-actions">
-                    <span className="poster-hover-watch"><Play size={16} fill="currentColor" /> {t("Watch Now")}</span>
+                    <span className="poster-hover-watch"><Play size={16} fill="currentColor" /> Watch Now</span>
                     <span className="poster-hover-add"><Plus size={22} /></span>
                   </span>
                   <span className="poster-hover-meta">{item.year} / TMDB {item.rating}</span>
@@ -146,4 +144,3 @@ export default function Search() {
     </>
   );
 }
-

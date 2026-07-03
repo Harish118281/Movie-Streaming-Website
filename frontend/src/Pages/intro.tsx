@@ -9,7 +9,6 @@ import {
   UsersRound,
 } from "lucide-react";
 import backgroundImage from "../assets/background.jpg";
-import { useLanguage, type LanguageCode } from "../Language/LanguageContext";
 import "./intro.css";
 
 type IntroCard = {
@@ -58,7 +57,6 @@ const reasonCards = [
 
 export default function Intro() {
   const [items, setItems] = useState<IntroCard[]>([]);
-  const { language, options, setLanguage, tmdbLanguage, t } = useLanguage();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -66,7 +64,7 @@ export default function Intro() {
     const loadTrending = async () => {
       for (const baseUrl of API_BASE_URLS) {
         try {
-          const params = new URLSearchParams({ language: tmdbLanguage });
+          const params = new URLSearchParams({ language: "en-US" });
           const response = await fetch(`${baseUrl}/api/tmdb/page/home?${params.toString()}`, {
             signal: controller.signal,
           });
@@ -89,7 +87,7 @@ export default function Intro() {
     loadTrending();
 
     return () => controller.abort();
-  }, [tmdbLanguage]);
+  }, []);
 
   const trending = useMemo(() => {
     const seen = new Set<string>();
@@ -122,32 +120,22 @@ export default function Intro() {
           </Link>
 
           <div className="intro-top-actions">
-            <label className="intro-language">
+            <span className="intro-language" aria-label="Website language">
               <Languages size={20} />
-              <select
-                value={language}
-                onChange={(event) => setLanguage(event.target.value as LanguageCode)}
-                aria-label={t("Select language")}
-              >
-                {options.map((option) => (
-                  <option value={option.code} key={option.code}>
-                    {option.nativeLabel}
-                  </option>
-                ))}
-              </select>
-            </label>
+              <span>English</span>
+            </span>
 
             <Link className="intro-signup" to="/signup">
-              {t("Signup")}
+              Signup
             </Link>
           </div>
         </header>
 
         <div className="intro-hero-copy">
-          <h1>{t("Unlimited movies, TV shows, and more")}</h1>
+          <h1>Unlimited movies, TV shows, and more</h1>
 
           <Link className="intro-login-button" to="/login">
-            {t("Login")}
+            Login
             <ChevronRight size={34} />
           </Link>
         </div>
@@ -157,9 +145,9 @@ export default function Intro() {
 
       <section className="intro-more">
         <div className="intro-section-inner">
-          <h2>{t("Trending Now")}</h2>
+          <h2>Trending Now</h2>
 
-          <div className="intro-trending-row" aria-label={t("Trending movies and shows")}>
+          <div className="intro-trending-row" aria-label="Trending movies and shows">
             {trending.map((item, index) => (
               <article className="intro-trending-card" key={`${item.mediaType}-${item.id}`}>
                 <img src={item.posterUrl || item.backdropUrl} alt={item.title} />
@@ -168,13 +156,13 @@ export default function Intro() {
             ))}
           </div>
 
-          <h2>{t("More Reasons to Join")}</h2>
+          <h2>More Reasons to Join</h2>
 
           <div className="intro-reasons-grid">
             {reasonCards.map(({ title, text, icon: Icon }) => (
               <article className="intro-reason-card" key={title}>
-                <h3>{t(title)}</h3>
-                <p>{t(text)}</p>
+                <h3>{title}</h3>
+                <p>{text}</p>
                 <Icon size={58} strokeWidth={1.8} />
               </article>
             ))}

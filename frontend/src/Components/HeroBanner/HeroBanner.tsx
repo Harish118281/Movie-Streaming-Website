@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties, type MouseEvent } from "react";
 import { ChevronLeft, ChevronRight, Play, Plus } from "lucide-react";
 import { openMovieDetails, playMovieTrailer, type MovieDetailsTarget } from "../MovieDetails/MovieDetails";
-import { useLanguage } from "../../Language/LanguageContext";
 import "./HeroBanner.css";
 
 
@@ -54,7 +53,6 @@ const heroSlideTargetFromId = (id: string): MovieDetailsTarget | null => {
 export default function HeroBanner({ content }: HeroBannerProps) {
   const previewTrackRef = useRef<HTMLDivElement>(null);
   const [activePreviewIndex, setActivePreviewIndex] = useState(0);
-  const { t } = useLanguage();
 
   const slides = useMemo(() => {
     const previewSlides = content.previews.length > 0
@@ -182,20 +180,20 @@ export default function HeroBanner({ content }: HeroBannerProps) {
         <div className="hero-actions">
           <button className="hero-watch-button" type="button" onClick={playActiveSlideTrailer} >
             <Play size={24} fill="currentColor" />
-            <span>{t(activeSlide.primaryActionLabel)}</span>
+            <span>{activeSlide.primaryActionLabel}</span>
           </button>
 
-          <button className="hero-add-button" type="button" aria-label={`${t("Add")} ${activeSlide.title}`}>
+          <button className="hero-add-button" type="button" aria-label={`Add ${activeSlide.title}`}>
             <Plus size={30} />
           </button>
         </div>
       </div>
 
-      <div className="hero-preview-strip" aria-label={t("Featured titles")}>
+      <div className="hero-preview-strip" aria-label="Featured titles">
         <button
           className="hero-preview-arrow hero-preview-arrow-left"
           type="button"
-          aria-label={t("Previous featured title")}
+          aria-label="Previous featured title"
           onClick={(event) => {
             event.stopPropagation();
             scrollPreviews(-1);
@@ -225,7 +223,7 @@ export default function HeroBanner({ content }: HeroBannerProps) {
         <button
           className="hero-preview-arrow hero-preview-arrow-right"
           type="button"
-          aria-label={t("Next featured title")}
+          aria-label="Next featured title"
           onClick={(event) => {
             event.stopPropagation();
             scrollPreviews(1);

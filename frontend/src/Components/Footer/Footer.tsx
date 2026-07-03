@@ -1,5 +1,4 @@
 import { Check } from "lucide-react";
-import { useLanguage, type LanguageCode } from "../../Language/LanguageContext";
 import "./Footer.css";
 
 const COMPANY_LINKS = ["About Us", "Careers"];
@@ -15,65 +14,53 @@ const STORE_LINKS = [
 ];
 
 export default function Footer() {
-  const { language, options, setLanguage, t } = useLanguage();
-
   return (
     <footer className="site-footer">
       <section className="footer-column footer-company">
-        <h2>{t("Company")}</h2>
+        <h2>Company</h2>
 
-        <nav aria-label={t("Company")}>
+        <nav aria-label="Company">
           {COMPANY_LINKS.map((link) => (
             <a href="#" key={link}>
-              {t(link)}
+              {link}
             </a>
           ))}
         </nav>
 
-        <p className="footer-copyright">{t("© 2026 STAR. All Rights Reserved.")}</p>
+        <p className="footer-copyright">&copy; 2026 STAR. All Rights Reserved.</p>
 
         <nav className="footer-legal-links" aria-label="Legal links">
           {LEGAL_LINKS.map((link) => (
             <a href="#" key={link}>
-              {t(link)}
+              {link}
             </a>
           ))}
         </nav>
       </section>
 
       <section className="footer-column">
-        <h2>{t("View Website in")}</h2>
+        <h2>View Website in</h2>
 
-        <label className="footer-language-button">
+        <div className="footer-language-button" aria-label="Website language">
           <Check size={23} strokeWidth={2.4} />
-          <select
-            value={language}
-            onChange={(event) => setLanguage(event.target.value as LanguageCode)}
-            aria-label={t("Select language")}
-          >
-            {options.map((option) => (
-              <option value={option.code} key={option.code}>
-                {option.nativeLabel}
-              </option>
-            ))}
-          </select>
-        </label>
+          <span>English</span>
+        </div>
       </section>
 
       <section className="footer-column">
-        <h2>{t("Need Help?")}</h2>
+        <h2>Need Help?</h2>
 
         <nav aria-label="Help links">
           {HELP_LINKS.map((link) => (
             <a href="#" key={link}>
-              {t(link)}
+              {link}
             </a>
           ))}
         </nav>
       </section>
 
       <section className="footer-column footer-connect">
-        <h2>{t("Connect with Us")}</h2>
+        <h2>Connect with Us</h2>
 
         <div className="footer-social-links">
           {SOCIAL_LINKS.map((link) => (
@@ -86,8 +73,8 @@ export default function Footer() {
         <div className="footer-store-links">
           {STORE_LINKS.map((store) => (
             <a href="#" className="footer-store-badge" key={store.label}>
-              <small>{t(store.eyebrow)}</small>
-              <strong>{t(store.label)}</strong>
+              <small>{store.eyebrow}</small>
+              <strong>{store.label}</strong>
             </a>
           ))}
         </div>

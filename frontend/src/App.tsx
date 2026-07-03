@@ -23,7 +23,6 @@ import Movies from "./Pages/movies";
 import Animes from "./Pages/Animes";
 import Categories from "./Pages/categories";
 import MySpace from "./Pages/myspace";
-import { LanguageProvider } from "./Language/LanguageContext";
 import "./App.css";
 import "./Components/Footer/Footer"
 
@@ -116,11 +115,9 @@ function AppContent() {
 
 function App() {
   return (
-    <LanguageProvider>
-      <BrowserRouter>
-        <AppContent />
-      </BrowserRouter>
-    </LanguageProvider>
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   );
 }
 

@@ -1,7 +1,6 @@
 ﻿import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Clapperboard, Monitor, PlaySquare, Sparkles } from "lucide-react";
-import Header from "../Components/header/header";
 import "./page.css";
 
 type CategoryTile = {
@@ -90,7 +89,6 @@ export default function Categories() {
 
   return (
     <>
-      <Header />
 
       <section className="categories-page">
         {!data ? (

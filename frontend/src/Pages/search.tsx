@@ -2,7 +2,6 @@
 import { Play, Plus, Search as SearchIcon, VolumeX } from "lucide-react";
 import { openMovieDetails } from "../Components/MovieDetails/MovieDetails";
 import type { ContentCard, ContentRowData } from "../Components/ContentRow/ContentRow";
-import Header from "../Components/header/header";
 import "./page.css";
 
 type SearchResponse = {
@@ -77,7 +76,6 @@ export default function Search() {
 
   return (
     <>
-      <Header />
 
       <section className="search-page search-poster-page" aria-busy={loading}>
         <label className="search-hero-box">
